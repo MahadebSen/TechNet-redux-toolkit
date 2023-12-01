@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
+import { auth } from '@/lib/firebase';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -17,6 +20,18 @@ interface LoginFormInputs {
 }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location.state?.from?.pathname || '/';
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  if (user) {
+    navigate(form, { replace: true });
+  }
+
+  console.log({ user, loading, error });
   const {
     register,
     handleSubmit,
@@ -24,7 +39,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<LoginFormInputs>();
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
+    const email = data.email;
+    const password = data.password;
+    signInWithEmailAndPassword(email, password);
   };
 
   return (

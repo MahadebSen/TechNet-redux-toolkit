@@ -7,6 +7,7 @@ import Products from '@/pages/Products';
 import Checkout from '@/pages/Checkout';
 import Signup from '@/pages/Signup';
 import ProductDetails from '@/pages/ProductDetails';
+import { RequireAuth } from '@/customHooks/requireAuth';
 
 const routes = createBrowserRouter([
   {
@@ -19,15 +20,27 @@ const routes = createBrowserRouter([
       },
       {
         path: '/products',
-        element: <Products />,
+        element: (
+          <RequireAuth>
+            <Products />
+          </RequireAuth>
+        ),
       },
       {
         path: '/product-details/:id',
-        element: <ProductDetails />,
+        element: (
+          <RequireAuth>
+            <ProductDetails />
+          </RequireAuth>
+        ),
       },
       {
         path: '/checkout',
-        element: <Checkout />,
+        element: (
+          <RequireAuth>
+            <Checkout />
+          </RequireAuth>
+        ),
       },
     ],
   },

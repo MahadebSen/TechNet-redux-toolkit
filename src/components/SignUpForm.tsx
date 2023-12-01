@@ -8,23 +8,50 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
+import { auth } from '@/lib/firebase';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface SignupFormInputs {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location.state?.from?.pathname || '/';
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  if (user) {
+    navigate(form, { replace: true });
+  }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<SignupFormInputs>();
 
   const onSubmit = (data: SignupFormInputs) => {
-    console.log(data);
+    const email = data.email;
+    const password = data.password;
+    const confirmPassword = data.confirmPassword;
+
+    if (password === confirmPassword) {
+      createUserWithEmailAndPassword(email, password);
+    } else {
+      setError('confirmPassword', {
+        type: 'custom',
+        message: 'Confirm password is wrong',
+      });
+    }
   };
 
   return (
@@ -44,7 +71,9 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect="off"
               {...register('email', { required: 'Email is required' })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-600 text-sm">{errors.email.message}</p>
+            )}
             <Input
               id="password"
               placeholder="your password"
@@ -53,16 +82,27 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect="off"
               {...register('password', { required: 'Password is required' })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-600 text-sm">{errors.password.message}</p>
+            )}
             <Input
-              id="password"
+              id="confirmPassword"
               placeholder="confirm password"
               type="password"
               autoCapitalize="none"
               autoCorrect="off"
+              {...register('confirmPassword', {
+                required: 'Confirm password is required',
+              })}
             />
+            {errors.confirmPassword && (
+              <p className="text-red-600 text-sm">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </div>
-          <Button>Create Account</Button>
+          {error && <p>{error.message}</p>}
+          <Button disabled={loading}>Create Account</Button>
         </div>
       </form>
       <div className="relative">
