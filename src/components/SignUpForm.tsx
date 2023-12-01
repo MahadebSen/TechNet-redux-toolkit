@@ -8,9 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
+<<<<<<< HEAD
 import { auth } from '@/lib/firebase';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
+=======
+import { useAppDispatch } from '@/redux/hook';
+import { createUser } from '@/redux/features/user/userSlice';
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -39,7 +44,10 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     setError,
   } = useForm<SignupFormInputs>();
 
+  const dispatch = useAppDispatch();
+
   const onSubmit = (data: SignupFormInputs) => {
+<<<<<<< HEAD
     const email = data.email;
     const password = data.password;
     const confirmPassword = data.confirmPassword;
@@ -52,6 +60,10 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
         message: 'Confirm password is wrong',
       });
     }
+=======
+    console.log(data);
+    dispatch(createUser({ email: data.email, password: data.password }));
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
   };
 
   return (

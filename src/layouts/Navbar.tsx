@@ -12,12 +12,37 @@ import {
 import { HiOutlineSearch } from 'react-icons/hi';
 import Cart from '../components/Cart';
 import logo from '../assets/images/technet-logo.png';
+<<<<<<< HEAD
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
 import { signOut } from 'firebase/auth';
 
 export default function Navbar() {
   const [user] = useAuthState(auth);
+=======
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { setLoading, setUser } from '@/redux/features/user/userSlice';
+
+export default function Navbar() {
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = () => {
+    dispatch(setLoading(true));
+
+    signOut(auth)
+      .then(() => {
+        dispatch(setUser(null));
+        dispatch(setLoading(false));
+      })
+      .catch((error) => {
+        dispatch(setLoading(false));
+        console.log(error);
+      });
+  };
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
@@ -53,6 +78,7 @@ export default function Navbar() {
               <li>
                 <Cart />
               </li>
+<<<<<<< HEAD
               {user ? (
                 <li className="ml-5">
                   <DropdownMenu>
@@ -90,6 +116,58 @@ export default function Navbar() {
                   </Button>
                 </li>
               )}
+=======
+              <li className="ml-5">
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="outline-none">
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer">
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      Billing
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      Team
+                    </DropdownMenuItem>
+                    {!user.email && (
+                      <>
+                        <Link to="/login">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Login
+                          </DropdownMenuItem>
+                        </Link>
+                        <Link to="/signup">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Sign up
+                          </DropdownMenuItem>
+                        </Link>
+                      </>
+                    )}
+
+                    {user.email && (
+                      <DropdownMenuItem
+                        onClick={handleLogOut}
+                        className="cursor-pointer"
+                      >
+                        Log out
+                      </DropdownMenuItem>
+                    )}
+
+                    <DropdownMenuItem className="cursor-pointer">
+                      Subscription
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
             </ul>
           </div>
         </div>

@@ -7,7 +7,11 @@ import Products from '@/pages/Products';
 import Checkout from '@/pages/Checkout';
 import Signup from '@/pages/Signup';
 import ProductDetails from '@/pages/ProductDetails';
+<<<<<<< HEAD
 import { RequireAuth } from '@/customHooks/requireAuth';
+=======
+import PrivateRoute from './PrivateRoute';
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
 const routes = createBrowserRouter([
   {
@@ -37,9 +41,15 @@ const routes = createBrowserRouter([
       {
         path: '/checkout',
         element: (
+<<<<<<< HEAD
           <RequireAuth>
             <Checkout />
           </RequireAuth>
+=======
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+>>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
         ),
       },
     ],
