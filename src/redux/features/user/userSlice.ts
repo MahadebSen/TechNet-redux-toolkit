@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
@@ -58,6 +59,7 @@ const userSlice = createSlice({
       state.isLoading = action.payload;
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {

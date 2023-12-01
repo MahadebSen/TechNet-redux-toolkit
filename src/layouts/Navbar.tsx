@@ -12,14 +12,6 @@ import {
 import { HiOutlineSearch } from 'react-icons/hi';
 import Cart from '../components/Cart';
 import logo from '../assets/images/technet-logo.png';
-<<<<<<< HEAD
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/lib/firebase';
-import { signOut } from 'firebase/auth';
-
-export default function Navbar() {
-  const [user] = useAuthState(auth);
-=======
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
@@ -42,7 +34,6 @@ export default function Navbar() {
         console.log(error);
       });
   };
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
@@ -78,45 +69,6 @@ export default function Navbar() {
               <li>
                 <Cart />
               </li>
-<<<<<<< HEAD
-              {user ? (
-                <li className="ml-5">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="outline-none">
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>Account</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="cursor-pointer">
-                        Profile
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => signOut(auth)}
-                        className="cursor-pointer"
-                      >
-                        Sign out
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer">
-                        Team
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="cursor-pointer">
-                        Subscription
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </li>
-              ) : (
-                <li>
-                  <Button variant="link" asChild>
-                    <Link to="/login">Log In</Link>
-                  </Button>
-                </li>
-              )}
-=======
               <li className="ml-5">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="outline-none">
@@ -167,7 +119,6 @@ export default function Navbar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </li>
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
             </ul>
           </div>
         </div>

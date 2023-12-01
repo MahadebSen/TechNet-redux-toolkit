@@ -6,16 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-<<<<<<< HEAD
-import { auth } from '@/lib/firebase';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
-=======
+
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { loginUser } from '@/redux/features/user/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -25,44 +20,29 @@ interface LoginFormInputs {
 }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
+  const { user, isLoading } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
   const location = useLocation();
   const form = location.state?.from?.pathname || '/';
 
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-
-  if (user) {
-    navigate(form, { replace: true });
-  }
-
-  console.log({ user, loading, error });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  const { user, isLoading } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
   const onSubmit = (data: LoginFormInputs) => {
-<<<<<<< HEAD
-    const email = data.email;
-    const password = data.password;
-    signInWithEmailAndPassword(email, password);
-=======
     console.log(data);
     dispatch(loginUser({ email: data.email, password: data.password }));
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
   };
 
   useEffect(() => {
     if (user.email && !isLoading) {
-      navigate('/');
+      navigate(form, { replace: true });
     }
-  }, [isLoading, navigate, user.email]);
+  }, [form, isLoading, navigate, user.email]);
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>

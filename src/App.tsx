@@ -10,6 +10,7 @@ function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setLoading(true));
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(setUser(user.email));

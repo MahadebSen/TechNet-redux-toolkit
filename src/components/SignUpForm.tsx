@@ -8,14 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-<<<<<<< HEAD
-import { auth } from '@/lib/firebase';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
-=======
+
 import { useAppDispatch } from '@/redux/hook';
 import { createUser } from '@/redux/features/user/userSlice';
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -26,44 +21,28 @@ interface SignupFormInputs {
 }
 
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const form = location.state?.from?.pathname || '/';
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const form = location.state?.from?.pathname || '/';
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  // const [createUserWithEmailAndPassword, user, loading, error] =
+  //   useCreateUserWithEmailAndPassword(auth);
 
-  if (user) {
-    navigate(form, { replace: true });
-  }
+  // if (user) {
+  //   navigate(form, { replace: true });
+  // }
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<SignupFormInputs>();
 
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: SignupFormInputs) => {
-<<<<<<< HEAD
-    const email = data.email;
-    const password = data.password;
-    const confirmPassword = data.confirmPassword;
-
-    if (password === confirmPassword) {
-      createUserWithEmailAndPassword(email, password);
-    } else {
-      setError('confirmPassword', {
-        type: 'custom',
-        message: 'Confirm password is wrong',
-      });
-    }
-=======
     console.log(data);
     dispatch(createUser({ email: data.email, password: data.password }));
->>>>>>> 54cc45621411b74c23e5668ef119ab39b7fa6725
   };
 
   return (
@@ -113,8 +92,8 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               </p>
             )}
           </div>
-          {error && <p>{error.message}</p>}
-          <Button disabled={loading}>Create Account</Button>
+          {/* {error && <p>{error.message}</p>} */}
+          <Button>Create Account</Button>
         </div>
       </form>
       <div className="relative">
