@@ -20,5 +20,5 @@ export default function PrivateRoute({ children }: IProps) {
     return <Navigate to="/login" state={{ path: pathname }} />;
   }
 
-  return <div>PrivateRoute</div>;
+  return children;
 }

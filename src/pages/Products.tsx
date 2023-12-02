@@ -10,28 +10,15 @@ import {
 } from '@/redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { IProduct } from '@/types/globalTypes';
-// import { useEffect, useState } from 'react';
 
 export default function Products() {
-  // const [data, setData] = useState<IProduct[]>([]);
-  // useEffect(() => {
-  //   fetch('./data.json')
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  // }, []);
-
   const { data } = useGetProductsQuery(undefined);
 
   const { toast } = useToast();
   const { status, priceRange } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
-  //! Dummy Data
-
-  //! **
-
   const handleSlider = (value: number[]) => {
-    // console.log(value);
     dispatch(setPriceRange(value[0]));
   };
 

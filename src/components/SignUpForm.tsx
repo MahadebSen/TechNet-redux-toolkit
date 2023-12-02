@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useEffect } from 'react';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -9,8 +9,9 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 
-import { useAppDispatch } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { createUser } from '@/redux/features/user/userSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -21,16 +22,12 @@ interface SignupFormInputs {
 }
 
 export function SignupForm({ className, ...props }: UserAuthFormProps) {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const form = location.state?.from?.pathname || '/';
+  const { user, isLoading, error } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
-  // const [createUserWithEmailAndPassword, user, loading, error] =
-  //   useCreateUserWithEmailAndPassword(auth);
-
-  // if (user) {
-  //   navigate(form, { replace: true });
-  // }
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location.state?.path || '/';
 
   const {
     register,
@@ -38,12 +35,16 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     formState: { errors },
   } = useForm<SignupFormInputs>();
 
-  const dispatch = useAppDispatch();
-
   const onSubmit = (data: SignupFormInputs) => {
     console.log(data);
     dispatch(createUser({ email: data.email, password: data.password }));
   };
+
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate(form, { replace: true });
+    }
+  }, [form, isLoading, navigate, user.email]);
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
@@ -92,7 +93,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
               </p>
             )}
           </div>
-          {/* {error && <p>{error.message}</p>} */}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           <Button>Create Account</Button>
         </div>
       </form>

@@ -20,12 +20,12 @@ interface LoginFormInputs {
 }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user, isLoading, error } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
-  const form = location.state?.from?.pathname || '/';
+  const form = location.state?.path || '/';
 
   const {
     register,
@@ -34,7 +34,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<LoginFormInputs>();
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
+    console.log(location);
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
 
@@ -61,7 +61,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
               autoCorrect="off"
               {...register('email', { required: 'Email is required' })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-600 text-sm">{errors.email.message}</p>
+            )}
             <Input
               id="password"
               placeholder="your password"
@@ -70,8 +72,11 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
               autoComplete="password"
               {...register('password', { required: 'Password is required' })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-600 text-sm">{errors.password.message}</p>
+            )}
           </div>
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           <Button>Login with email</Button>
         </div>
       </form>

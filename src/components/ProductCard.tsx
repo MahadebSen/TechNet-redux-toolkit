@@ -12,6 +12,8 @@ interface IProps {
 export default function ProductCard({ product }: IProps) {
   const dispatch = useAppDispatch();
 
+  console.log(product);
+
   const handleAddProduct = (product: IProduct) => {
     dispatch(addToCart(product));
     toast({
