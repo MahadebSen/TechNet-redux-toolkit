@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { createUser } from '@/redux/features/user/userSlice';
+import { createUser, signInWithGoogle } from '@/redux/features/user/userSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
@@ -38,6 +38,10 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
   const onSubmit = (data: SignupFormInputs) => {
     console.log(data);
     dispatch(createUser({ email: data.email, password: data.password }));
+  };
+
+  const handleSignInWithGoogle = () => {
+    dispatch(signInWithGoogle());
   };
 
   useEffect(() => {
@@ -111,6 +115,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
         variant="outline"
         type="button"
         className="flex items-center justify-between"
+        onClick={() => handleSignInWithGoogle()}
       >
         <p>Google</p>
         <FcGoogle />

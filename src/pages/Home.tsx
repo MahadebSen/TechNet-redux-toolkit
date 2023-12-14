@@ -25,6 +25,7 @@ export default function Home() {
           <img src={banner} alt="" />
         </div>
       </div>
+
       <div className="mb-96">
         <div>
           <img className="mx-auto" src={hero} alt="" />

@@ -6,7 +6,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { useAppSelector } from '@/redux/hook';
-// import { IProduct } from '@/types/globalTypes';
 
 import { useState } from 'react';
 
@@ -130,7 +129,7 @@ export default function Checkout() {
             </div>
             <div className="flex justify-between text-xl font-bold">
               <p>Total</p>
-              <p>${total + deliveryCharge}</p>
+              <p>${total ? total + deliveryCharge : 0}</p>
             </div>
             <Button className="w-full">Checkout</Button>
           </div>
