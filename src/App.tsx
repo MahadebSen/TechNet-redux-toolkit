@@ -13,7 +13,7 @@ function App() {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(setUser(user.email));
+        dispatch(setUser(user));
         dispatch(setLoading(false));
       } else {
         dispatch(setLoading(false));

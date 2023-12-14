@@ -82,9 +82,11 @@ export default function Navbar() {
                     <DropdownMenuContent>
                       <DropdownMenuLabel>Account</DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className="cursor-pointer">
-                        Profile
-                      </DropdownMenuItem>
+                      <Link to="/profile">
+                        <DropdownMenuItem className="cursor-pointer">
+                          Profile
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem className="cursor-pointer">
                         Billing
                       </DropdownMenuItem>
