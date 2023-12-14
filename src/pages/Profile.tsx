@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/redux/hook';
 
 export default function Profile() {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   return (
     <div className="flex justify-center items-center gap-16 max-w-7xl mx-auto my-40">
       <div className="lg:max-w-md lg:w-80 md:w-1/2 w-5/6 mb-10 md:mb-0">
