@@ -38,8 +38,8 @@ export default function Products() {
   }
 
   return (
-    <div className="grid grid-cols-12 max-w-7xl mx-auto relative ">
-      <div className="col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky top-16 h-[calc(100vh-80px)]">
+    <div className="grid md:grid-cols-12 gap-8 max-w-7xl mx-auto">
+      <div className="md:col-span-3 m-3 md:m-0 rounded-lg md:rounded-none md:mr-10 md:space-y-5 border border-gray-200/80 p-5 self-start md:sticky sm:w-full md:top-16 md:h-[calc(100vh-80px)]">
         <div>
           <h1 className="text-2xl uppercase">Availability</h1>
           <div
@@ -64,7 +64,8 @@ export default function Products() {
           <div>From 0$ To {priceRange}$</div>
         </div>
       </div>
-      <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
+
+      <div className="md:col-span-9 grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
         {productsData?.map((product: IProduct) => (
           <ProductCard product={product} />
         ))}
