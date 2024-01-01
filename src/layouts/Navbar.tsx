@@ -38,7 +38,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
+    <nav className="h-16 w-full fixed top backdrop-blur-lg z-10">
       <div className="h-full w-full bg-white/60">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-2 md:mx-auto md:px-6">
           <div>
@@ -46,6 +46,7 @@ export default function Navbar() {
               <img className="h-8" src={logo} alt="log" />
             </Link>
           </div>
+
           <div className="hidden md:block">
             <ul className="flex items-center">
               <li>
@@ -115,10 +116,45 @@ export default function Navbar() {
               )}
             </ul>
           </div>
+
           <div className="md:hidden">
-            <Button variant="ghost">
-              <HiMenuAlt3 size="25" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button variant="ghost">
+                  <HiMenuAlt3 size="25" />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Products</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <Link to="/products">
+                  <DropdownMenuItem className="cursor-pointer">
+                    Products
+                  </DropdownMenuItem>
+                </Link>
+                <Link to="/checkout">
+                  <DropdownMenuItem className="cursor-pointer mb-3">
+                    Checkout
+                  </DropdownMenuItem>
+                </Link>
+
+                <DropdownMenuLabel>Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <Link to="/profile">
+                  <DropdownMenuItem className="cursor-pointer">
+                    Profile
+                  </DropdownMenuItem>
+                </Link>
+
+                <DropdownMenuItem
+                  onClick={handleLogOut}
+                  className="cursor-pointer"
+                >
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

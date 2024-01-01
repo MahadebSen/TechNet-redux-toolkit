@@ -13,19 +13,25 @@ export default function ProductDetails() {
 
   return (
     <>
-      <div className="flex max-w-7xl mx-auto items-center border-b border-gray-300">
-        <div className="w-[50%]">
-          <img src={product?.image} alt="" />
+      <div className="flex flex-col md:flex-row xl:max-w-7xl xl:mx-auto m-5 items-center border-b border-gray-300">
+        <div className="md:w-[50%]">
+          <img className="w-full" src={product?.image} alt="" />
         </div>
-        <div className="w-[50%] space-y-3">
+
+        <div className="md:w-[50%] space-y-3 my-5">
           <h1 className="text-3xl font-semibold">{product?.name}</h1>
           <p className="text-xl">Rating: {product?.rating}</p>
-          <ul className="space-y-1 text-lg">
+          <p>
+            <span className="text-xl">Features: </span>
+          </p>
+          <ul className="space-y-1 text-lg list-inside list-disc">
             {product?.features?.map((feature: string) => (
-              <li key={feature}>{feature}</li>
+              <li className="text-[15px] xl:text-base" key={feature}>
+                {feature}
+              </li>
             ))}
           </ul>
-          <Button>Add to cart</Button>
+          <Button disabled={!product?.status}>Add to cart</Button>
         </div>
       </div>
       <ProductReview id={id} />

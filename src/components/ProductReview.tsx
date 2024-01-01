@@ -38,7 +38,7 @@ export default function ProductReview({ id }: IProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-5">
+    <div className="xl:max-w-7xl xl:mx-auto m-5">
       <form className="flex gap-5 items-center" onSubmit={handleSubmit}>
         <Textarea
           className="min-h-[30px]"

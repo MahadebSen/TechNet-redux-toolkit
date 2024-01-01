@@ -19,9 +19,9 @@ export default function Checkout() {
   //! **
 
   return (
-    <div className="flex justify-center items-center h-[calc(100vh-80px)] gap-10 text-primary">
-      <div className="max-w-3xl w-full">
-        <h1 className="mb-2">Delivery Information</h1>
+    <div className="flex flex-col md:flex-row justify-center items-center md:h-[calc(100vh-80px)] gap-10 text-primary m-5">
+      <div className="max-w-lg lg:max-w-3xl w-full">
+        <p className="mb-2 text-xl font-medium">Delivery Information</p>
         <div className="h-[60vh] border border-gray-300 rounded-md p-10 overflow-auto">
           <div className="flex gap-5">
             <div className="w-full space-y-5">
@@ -95,8 +95,9 @@ export default function Checkout() {
           </div>
         </div>
       </div>
-      <div className="max-w-lg w-full">
-        <h1 className="mb-2">Order Summery</h1>
+
+      <div className="max-w-lg  w-full">
+        <p className="mb-2 text-xl font-medium">Order Summery</p>
         <div className="border border-gray-300 rounded-md h-[60vh] p-10 flex flex-col">
           <div className="flex-grow  mb-2 space-y-2 overflow-auto">
             {products.map((product) => (

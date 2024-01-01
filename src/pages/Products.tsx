@@ -38,8 +38,8 @@ export default function Products() {
   }
 
   return (
-    <div className="grid md:grid-cols-12 gap-8 max-w-7xl mx-auto">
-      <div className="md:col-span-3 m-3 md:m-0 rounded-lg md:rounded-none md:mr-10 md:space-y-5 border border-gray-200/80 p-5 self-start md:sticky sm:w-full md:top-16 md:h-[calc(100vh-80px)]">
+    <div className="grid md:grid-cols-12 gap-8 max-w-7xl m-4 md:mx-auto">
+      <div className="md:col-span-3 rounded-lg md:rounded-none md:mr-10 md:space-y-5 border border-gray-200/80 p-5 self-start md:w-full md:sticky md:top-16 md:h-[calc(100vh-80px)]">
         <div>
           <h1 className="text-2xl uppercase">Availability</h1>
           <div

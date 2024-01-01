@@ -34,6 +34,7 @@ export default function Cart() {
           <HiOutlineShoppingCart size="25" />
         </Button>
       </SheetTrigger>
+
       <SheetContent className="overflow-auto relative">
         <SheetHeader>
           <SheetTitle>Cart</SheetTitle>
@@ -42,21 +43,27 @@ export default function Cart() {
         <div className="space-y-5">
           {products.map((product) => (
             <div
-              className="border h-44 p-5 flex justify-between rounded-md"
+              className="border xl:h-44 p-5 flex flex-col xl:flex-row justify-between rounded-md"
               key={product.name}
             >
-              <div className="border-r pr-5 shrink-0">
+              <div className="xl:border-r pr-5 shrink-0">
                 <img src={product?.image} alt="" className="h-full" />
               </div>
               <div className="px-2 w-full flex flex-col gap-3">
-                <h1 className="text-2xl self-center">{product?.name}</h1>
-                <p>Quantity: {product.quantity}</p>
-                <p className="text-xl">
-                  Total Price: {(product.price * product.quantity!).toFixed(2)}{' '}
-                  $
+                <h1 className="text-2xl self-center xl:self-start">
+                  {product?.name}
+                </h1>
+                <p>
+                  <span className="text-lg font-medium">Quantity:</span>{' '}
+                  {product.quantity}
+                </p>
+                <p className="text-lg">
+                  <span className="font-medium">Total Price:</span>{' '}
+                  {(product.price * product.quantity!).toFixed(2)} $
                 </p>
               </div>
-              <div className="border-l pl-5 flex flex-col justify-between">
+
+              <div className="xl:border-l xl:pl-5 flex flex-row xl:flex-col justify-between mt-4 xl:mt-0">
                 <Button onClick={() => dispatch(addToCart(product))}>
                   <HiOutlinePlus size="20" />
                 </Button>
