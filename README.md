@@ -13,7 +13,6 @@ https://github.com/MahadebSen/TechNet-Server
 - Vite.js
 - Redux toolkit
 - React-Router
-- React-Query
 - React-hook-form
 - React toastify
 - Firebase authentication
@@ -25,10 +24,6 @@ https://github.com/MahadebSen/TechNet-Server
 ## Features of this site :
 
 - Authentication system implemented by Firebase authentication.
-- This site has 2 different dashboards for users and admin. For the admin feature, please log in by "sayan@das.com" | "sayan1234".
-- Used private routing, and JWT token.
-- Admin can convert another user to admin.
-- Admin can manage all products and also can add new products.
-- Admin can manage all users' orders.
-- Users can edit their profile.
+- Used private routing based on user authentication.
+- Users can filter out products according to their criteria.
 - Users can add their comment on site.
