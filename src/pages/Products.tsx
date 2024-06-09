@@ -1,4 +1,5 @@
 import ProductCard from '@/components/ProductCard';
+import ProductLoading from '@/components/productLoading';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -12,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { IProduct } from '@/types/globalTypes';
 
 export default function Products() {
-  const { data } = useGetProductsQuery(undefined);
+  const { data, isLoading } = useGetProductsQuery(undefined);
 
   // const { toast } = useToast();
   const { status, priceRange } = useAppSelector((state) => state.product);
@@ -65,11 +66,15 @@ export default function Products() {
         </div>
       </div>
 
-      <div className="md:col-span-9 grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
-        {productsData?.map((product: IProduct) => (
-          <ProductCard product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <ProductLoading />
+      ) : (
+        <div className="md:col-span-9 grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-20">
+          {productsData?.map((product: IProduct) => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
